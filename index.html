@@ -1,0 +1,20 @@
+<html ng-app="app">
+	<head>
+		<meta  charset="utf-8" />
+		<title>New Web Project</title>
+		<script src="js/angular.js"></script>
+		<script src="app/app.js"></script>
+	</head>
+	<body>
+		<h1>MY Angular Project</h1>
+		<div ng-controller="ctrl1">
+			{{name}}
+			<ul>
+				<li ng-repeat="c in colors">
+					{{c}}
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>
+
