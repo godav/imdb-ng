@@ -33,7 +33,7 @@
 						<input ng-model="search" placeholder="Find by first name" class="form-control"/>
 						<ul class="list-group">
 							<li class="list-group-item" ng-repeat="a in actors | filter:{f_name:search}">
-								<div class="name">{{a.f_name}} {{a.l_name}}</div>
+								<div class="name"><a href="{{a.id}}.html" target="_blank">{{a.f_name}} {{a.l_name}}</a></div>
 			
 							</li>
 						</ul>

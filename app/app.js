@@ -57,8 +57,37 @@ function ctrl1($scope,$http) {
 		id : 4,
 		selected : false,
 		link : false
-	}];
-
+	}, {
+		f_name : 'Anne',
+		l_name : 'Hathaway',
+		photo : "http://ia.media-imdb.com/images/M/MV5BNjQ5MTAxMDc5OF5BMl5BanBnXkFtZTcwOTI0OTE4OA@@._V1_UY317_CR1,0,214,317_AL_.jpg",
+		id : 5,
+		selected : false,
+		link : false
+	}, {
+		f_name : 'Amy',
+		l_name : 'Adams',
+		photo : "http://ia.media-imdb.com/images/M/MV5BMjE4NjExMjI1OF5BMl5BanBnXkFtZTcwODc0MjY2OQ@@._V1_UX214_CR0,0,214,317_AL_.jpg",
+		id : 6,
+		selected : false,
+		link : false
+	}, {
+		f_name : 'Matthew',
+		l_name : 'McConaughey',
+		photo : "http://ia.media-imdb.com/images/M/MV5BMTg0MDc3ODUwOV5BMl5BanBnXkFtZTcwMTk2NjY4Nw@@._V1_UX214_CR0,0,214,317_AL_.jpg",
+		id : 7,
+		selected : false,
+		link : false,
+	}, {
+		f_name : 'Leonardo',
+		l_name : 'DiCaprio',
+		photo : "http://ia.media-imdb.com/images/M/MV5BMjI0MTg3MzI0M15BMl5BanBnXkFtZTcwMzQyODU2Mw@@._V1_UY317_CR10,0,214,317_AL_.jpg",
+		id : 8,
+		selected : false,
+		link : false
+	}
+	];
+ 
 }
 
 function ctrl2($scope) {
