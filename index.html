@@ -5,13 +5,14 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<script src="js/angular.js"></script>
 		<script src="app/app.js"></script>
+		<script src="controllers/searchBox.js"></script>
 		<link rel="stylesheet" href="css/style.css">
 		<style>
 		</style>
 	</head>
 	<body>
 		
-		<div ng-controller="ctrl1">
+		<div ng-controller="searchBox">
 			<h1 class="text-center text-info">{{title}}</h1>
 			<div class="row">
 				<div class="col-lg-9">
@@ -19,33 +20,31 @@
 						<div class="col-lg-3" ng-repeat="a in actors">
 							<div class="panel panel-default">
 								
-								<div class="panel-body"><img src="{{a.photo}}"  ng-click="a.selected = !a.selected" 
+								<div class="panel-body"><img src="{{a.profile_path}}"  ng-click="a.selected = !a.selected" 
     																			class="img-responsive" 
   																   		  	    ng-class="{'selected-image': a.selected}" >
 								</div>
-								<div class="panel-heading"><a target="_blank" ng-href="{{a.id}}.html">{{a.f_name}} {{a.l_name}}</a></div>
+								<div class="panel-heading"><a target="_blank" ng-href="{{a.id}}.html">{{a.name}}</a></div>
 							</div>
 						</div>
 					</div>	
 				</div>
 				<div class="col-lg-3">
 					<div class="panel panel-default">
-						<input ng-model="search" placeholder="Find by first name" class="form-control"/>
+						<input ng-model="search" placeholder="Find by name" class="form-control"/>
 						<ul class="list-group">
-							<li class="list-group-item" ng-repeat="a in actors | filter:{f_name:search}">
-								<div class="name"><a href="{{a.id}}.html" target="_blank">{{a.f_name}} {{a.l_name}}</a></div>
+							<li class="list-group-item" ng-repeat="a in actors | filter:{name:search}">
+								<div class="name"><a href="{{a.id}}.html" target="_blank">{{a.name}}</a></div>
 			
 							</li>
 						</ul>
 					</div>
 					
-					<button class="btn" ng-click="sortByFirst()">
+					<button class="btn" ng-click="sortByName()">
 					 Sort by first name
 				   </button>
-				   
-				   	<button class="btn" ng-click="sortByLast()">
-					 Sort by last name
-				   </button>
+
+
 				</div>					
 			</div>
 		</div>
