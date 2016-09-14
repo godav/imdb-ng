@@ -5,12 +5,25 @@
 	imdb.controller("searchBox", searchBox)
 
 	function searchBox($scope,$http) {
-	$scope.title = "Actors";
+	$scope.title = "Search for actors or movies";
 	
-
+  	$scope.searchActors = function (e, myValue) {
+    var charCode = (e.which) ? e.which : e.keyCode;   
+        if ($scope.movies) 
+    		  $scope.movies=null; 
+    		  console.log(myValue);
+    	if (!myValue)  {
+    		$scope.actors = null;
+    		$scope.title = "No data found";
+    	}
+    	else {  
+    		$scope.actors = $scope.getActors(myValue);
+    		$scope.title = "Actors";
+   		 }
+	} 
 	
-	$scope.getActors = function (){
-		var promise = $http.get('http://api.themoviedb.org/3/search/person?api_key=f24727bdb915ca05f7718876104b211d&query=will');
+	$scope.getActors = function (name){
+		var promise = $http.get('http://api.themoviedb.org/3/search/person?api_key=f24727bdb915ca05f7718876104b211d&query=' + name);
 		
 		promise.then(successCallback,errorCallback);
 		
@@ -27,15 +40,40 @@
 	
 	}
 	
-	$scope.actors = $scope.getActors();
-	
-	$scope.showSearch = function() {
-		var newData = {	}
+	$scope.getMovies = function (name){
+		var promise = $http.get('http://api.themoviedb.org/3/search/movie?api_key=f24727bdb915ca05f7718876104b211d&query=' + name);
 		
-		newData.name=$scope.mySite;
-		newData.path = $scope.myPath;
-		$scope.sites.push(newData)
+		promise.then(successCallback,errorCallback);
+		
+		function successCallback(response)
+		{
+			$scope.movies = response.data.results;
+			console.log($scope.movies);
+		}
+		
+		function errorCallback(response)
+		{
+			alert('error');
+		}	
+	
 	}
+	
+	$scope.searchMovies = function (e, myValue) {
+    var charCode = (e.which) ? e.which : e.keyCode; 
+    	if ($scope.actors) 
+    		  $scope.actors=null;   
+    	if (!myValue)  {
+    		$scope.movies = null;
+    		$scope.title = "No data found";
+    	}
+    		
+    	else   {	   
+    		$scope.movies = $scope.getMovies(myValue);
+    		$scope.title = "Movies";
+    	}
+	}
+	
+
 	
 	
 	$scope.sortBysortByName = function() {

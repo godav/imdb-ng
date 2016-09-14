@@ -20,24 +20,37 @@
 						<div class="col-lg-3" ng-repeat="a in actors">
 							<div class="panel panel-default">
 								
-								<div class="panel-body"><img src="{{a.profile_path}}"  ng-click="a.selected = !a.selected" 
+								<div class="panel-body"><img src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{a.profile_path}}"  ng-click="a.selected = !a.selected" 
     																			class="img-responsive" 
   																   		  	    ng-class="{'selected-image': a.selected}" >
 								</div>
 								<div class="panel-heading"><a target="_blank" ng-href="{{a.id}}.html">{{a.name}}</a></div>
 							</div>
 						</div>
+						<div class="col-lg-3" ng-repeat="a in movies">
+							<div class="panel panel-default">
+								
+								<div class="panel-body"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{a.poster_path}}"  ng-click="a.selected = !a.selected" 
+    																			class="img-responsive" 
+  																   		  	    ng-class="{'selected-image': a.selected}" >
+								</div>
+								<div class="panel-heading"><a target="_blank" ng-href="{{a.id}}.html">{{a.title}}</a></div>
+							</div>
+						</div>
 					</div>	
 				</div>
 				<div class="col-lg-3">
 					<div class="panel panel-default">
-						<input ng-model="search" placeholder="Find by name" class="form-control"/>
+						<input ng-model="ActorName" ng-click="movieName=null" ng-keyup="searchActors($event, ActorName)" placeholder="Find by actor" class="form-control"/>
+						<input ng-model="movieName" ng-click="ActorName=null" ng-keyup="searchMovies($event, movieName)" placeholder="Find by movie" class="form-control"/>
+						<!--
 						<ul class="list-group">
 							<li class="list-group-item" ng-repeat="a in actors | filter:{name:search}">
 								<div class="name"><a href="{{a.id}}.html" target="_blank">{{a.name}}</a></div>
 			
 							</li>
 						</ul>
+						-->
 					</div>
 					
 					<button class="btn" ng-click="sortByName()">
