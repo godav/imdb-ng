@@ -13,15 +13,17 @@
 	<body>
 		
 		<div ng-controller="searchBox">
-			<h1 class="text-center text-info">{{title}}</h1>
+			
 			<div class="row">
 				<div class="col-lg-9">
+					<h1 class="text-center text-info">{{title}}</h1>
 					<div class="row">
 						
+				<!-- handle the panels of actors return by search	-->		
 						<div class="col-lg-3" ng-repeat="a in actors">
 							<div class="panel panel-default">
 								
-								<div class="panel-body"><img src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{a.profile_path}}"  ng-click="getMoviesOfActor(a) ; a.selected = !a.selected"
+								<div class="panel-body"><img ng-src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{a.profile_path}}" fallback-src="https://c1.staticflickr.com/1/186/382004453_f4b2772254.jpg" ng-click="getMoviesOfActor(a) ; a.selected = !a.selected ; movieName=null ; ActorName=null"
     																			class="img-responsive" 
   																   		  	    ng-class="{'selected-image': a.selected}" >
 								</div>
@@ -29,10 +31,11 @@
 							</div>
 						</div>
 						
+				<!-- handle the panels of movies return by search	-->				
 						<div class="col-lg-3" ng-repeat="a in movies">
 							<div class="panel panel-default">
 								
-								<div class="panel-body"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{a.poster_path}}"  ng-click="a.selected = !a.selected" 
+								<div class="panel-body"><img ng-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{a.poster_path}}" fallback-src="https://c1.staticflickr.com/1/186/382004453_f4b2772254.jpg"  ng-click="getActorsInMovie(a) ; a.selected = !a.selected ; movieName=null ; ActorName=null" 
     																			class="img-responsive" 
   																   		  	    ng-class="{'selected-image': a.selected}" >
 								</div>
@@ -40,43 +43,55 @@
 							</div>
 						</div>
 						
+				<!-- handle the panels of movies return for specific actor id	-->					
 						<div class="row">
-							<div class="row">				<!-- row to hold actor panel -->
-								<div class="panel panel-default">
-										  <div class="panel-body"><img src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{actor.profile_path}}" 
-		    																			class="img-responsive" 
-		  																   		  	    ng-class="{'selected-image': actor.selected}" >
-										  </div>
-										  <div class="panel-heading">{{actor.name}}</a></div>
+							
+								<div class="row col-centered">				<!-- row to hold actor panel -->
+									<div class="col-lg-3 col-centered" ng-show="actor != null">		
+										<div class="panel panel-default">
+												  <div class="panel-body"><img ng-src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{actor.profile_path}}" 
+												  												fallback-src="https://c1.staticflickr.com/1/186/382004453_f4b2772254.jpg"
+				    																			class="img-responsive" 
+				  																   		  	    ng-class="{'selected-image': actor.selected}" >
+												  </div>
+												  <div class="panel-heading">{{actor.name}}</a></div>
+											</div>
+								   </div>
+								 </div>   
+								<div class="row col-centered">				<!-- row to hold panel of actor movies  -->
+									<div class="col-lg-3" ng-repeat="a in moviesByActor">
+										<div class="panel panel-default">
+											  <div class="panel-body"><img ng-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{a.poster_path}}"  ng-click="a.selected = !a.selected ; getActorsInMovie(a)"
+			    																			fallback-src="https://c1.staticflickr.com/1/186/382004453_f4b2772254.jpg"
+			    																			class="img-responsive" 
+			  																   		  	    ng-class="{'selected-image': a.selected}" >
+											  </div>
+											  <div class="panel-heading">{{a.title}}</div>
+										</div>
 									</div>
-							</div>
-							<div class="row">				<!-- row to hold panel of actor movies  -->
-								<div class="col-lg-3" ng-repeat="a in moviesByActor">
-									<div class="panel panel-default">
-										  <div class="panel-body"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{a.poster_path}}"  ng-click="a.selected = !a.selected ; getActorsByMovie(a)"
-		    																			class="img-responsive" 
-		  																   		  	    ng-class="{'selected-image': a.selected}" >
-										  </div>
-										  <div class="panel-heading">{{a.name}}</div>
-									</div>
-								</div>
-						    </div>
+							    </div>
+						   
 						</div>
 						
-						<div class="row">
-							<div class="row">				<!-- row to hold actor panel -->
-								<div class="panel panel-default">
-										  <div class="panel-body"><img src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{movie.poster_path}}" 
-		    																			class="img-responsive" 
-		  																   		  	    ng-class="{'selected-image': movie.selected}" >
-										  </div>
-										  <div class="panel-heading">{{movie.title}}</a></div>
-									</div>
+					<!-- handle the panels of actors return for specific movie id	-->				
+					<div class="row">
+							<div class="row col-centered">				<!-- row to hold actor panel -->
+								<div class="col-lg-3 col-centered" ng-show="movie != null">	
+									<div class="panel panel-default">
+											  <div class="panel-body"><img ng-src="https://image.tmdb.org/t/p/w185_and_h278_bestv2{{movie.poster_path}}" 
+											  												fallback-src="https://c1.staticflickr.com/1/186/382004453_f4b2772254.jpg"
+			    																			class="img-responsive" 
+			  																   		  	    ng-class="{'selected-image': movie.selected}" >
+											  </div>
+											  <div class="panel-heading">{{movie.title}}</a></div>
+										</div>
+								</div>	
 							</div>
-							<div class="row">				<!-- row to hold panel of actor movies  -->
+							<div class="row col-centered">				<!-- row to hold panel of actor movies  -->
 								<div class="col-lg-3" ng-repeat="a in actorsInMovie">
 									<div class="panel panel-default">
-										  <div class="panel-body"><img src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{a.profile_path}}"  ng-click="a.selected = !a.selected ; getActorsInMovie(a)"
+										  <div class="panel-body"><img ng-src="https://image.tmdb.org/t/p/w235_and_h235_bestv2{{a.profile_path}}"  ng-click="a.selected = !a.selected ; getMoviesOfActor(a)"
+		    																			fallback-src="https://c1.staticflickr.com/1/186/382004453_f4b2772254.jpg"
 		    																			class="img-responsive" 
 		  																   		  	    ng-class="{'selected-image': a.selected}" >
 										  </div>

@@ -1,3 +1,8 @@
 .selected-image {
   border: 5px solid red;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
